@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {useDispatch , useSelector,} from 'react-redux';
 //actions de Redux
-import {crearNuevoProductoAction} from '../actions/productoActions'
+import {crearNuevoProductoAction} from '../actions/productoActions';
+import mostrarAlerta from '../actions/alertaAction';
 
 const NuevoProducto = ({history}) => {
     //utilizar dispach
@@ -21,6 +22,12 @@ const NuevoProducto = ({history}) => {
         e.preventDefault();
         //validar formulario
         if(nombre.trim() === '' || precio <= 0){
+
+            const alerta = {
+                msg: 'Ambos campos son obligatorios',
+                classes: 'alert alert-danger text-center text-uppercase p3'
+            }
+            dispatch(mostrarAlerta(alerta));
             return;
         }
         // si no hay errores
